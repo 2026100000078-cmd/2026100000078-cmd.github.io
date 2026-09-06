@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahbub Sami</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#3fa9e0;
+    --sky-deep:#1c74a8;
+    --sky-pale:#eaf7ff;
+    --white:#ffffff;
+    --red:#e6394a;
+    --ink:#0f2438;
+    --ink-soft:#4c657a;
+    --line:#d3e9f5;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  ::selection{background:var(--red);color:var(--white);}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 6%;
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, box-shadow .3s ease;
+  }
+  nav.scrolled{border-color:var(--line);box-shadow:0 4px 24px rgba(15,36,56,0.05);}
+
+  .brand{font-weight:700;font-size:1.15rem;letter-spacing:-0.02em;display:flex;align-items:center;gap:9px;}
+  .brand-dot{width:10px;height:10px;border-radius:50%;background:var(--red);
+    animation:pulse-dot 2.4s ease-in-out infinite;}
+  @keyframes pulse-dot{
+    0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(230,57,74,.5);}
+    50%{transform:scale(1.15);box-shadow:0 0 0 6px rgba(230,57,74,0);}
+  }
+
+  .nav-links{display:flex;gap:34px;font-size:.92rem;font-weight:500;}
+  .nav-links a{position:relative;color:var(--ink-soft);transition:color .25s;}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--sky);
+    transition:width .3s ease;
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a:hover::after{width:100%;}
+
+  @media (max-width:680px){ .nav-links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;align-items:center;
+    padding:0 6%;
+    background:
+      radial-gradient(ellipse at 85% 15%, rgba(63,169,224,.16), transparent 55%),
+      radial-gradient(ellipse at 10% 90%, rgba(230,57,74,.09), transparent 45%),
+      var(--white);
+  }
+
+  .hero-inner{max-width:900px;position:relative;z-index:2;padding-top:70px;}
+
+  .kicker{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.95rem;color:var(--ink-soft);
+    margin-bottom:22px;
+    opacity:0;animation:rise .7s .1s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .kicker svg{width:18px;height:18px;stroke:var(--red);}
+
+  .hero h1{
+    font-size:clamp(2.6rem,7vw,5.2rem);
+    line-height:1.02;
+    letter-spacing:-0.03em;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .hero h1 .line{display:block;overflow:hidden;}
+  .hero h1 .line span{display:inline-block;opacity:0;transform:translateY(110%);animation:rise 0.85s cubic-bezier(.2,.8,.2,1) forwards;}
+  .hero h1 .line:nth-child(1) span{animation-delay:.15s;}
+  .hero h1 .line:nth-child(2) span{animation-delay:.28s;color:var(--sky-deep);}
+
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+
+  .hero p.sub{
+    margin-top:26px;max-width:540px;font-size:1.12rem;line-height:1.6;color:var(--ink-soft);
+    opacity:0;animation:rise .7s .5s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+
+  .hero-tags{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;
+    opacity:0;animation:rise .7s .65s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .tag{
+    padding:9px 16px;border-radius:100px;font-size:.85rem;font-weight:500;
+    border:1px solid var(--line);color:var(--ink-soft);
+    transition:transform .25s ease, border-color .25s ease, color .25s ease;
+  }
+  .tag:hover{transform:translateY(-3px);border-color:var(--sky);color:var(--sky-deep);}
+  .tag.hot{background:var(--red);color:var(--white);border-color:var(--red);}
+  .tag.hot:hover{transform:translateY(-3px) rotate(-1deg);}
+
+  .ribbon{
+    position:absolute;top:0;right:0;width:46%;height:100%;
+    overflow:hidden;pointer-events:none;
+  }
+  .ribbon svg{position:absolute;top:-10%;right:-10%;width:120%;height:120%;}
+  .float{animation:float 7s ease-in-out infinite;}
+  .float-slow{animation:float 10s ease-in-out infinite;}
+  .float-rev{animation:float-rev 8s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-22px) rotate(3deg);}}
+  @keyframes float-rev{0%,100%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(18px) rotate(-4deg);}}
+
+  .scroll-cue{
+    position:absolute;bottom:34px;left:6%;display:flex;align-items:center;gap:10px;
+    font-size:.78rem;color:var(--ink-soft);
+    opacity:0;animation:rise .7s .9s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .scroll-cue .bar{width:1px;height:34px;background:var(--line);position:relative;overflow:hidden;}
+  .scroll-cue .bar::after{
+    content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--sky);
+    animation:scrollbar 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollbar{0%{top:-100%;}50%{top:0;}100%{top:100%;}}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:120px 6%;position:relative;}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head h2{font-size:clamp(1.9rem,4vw,2.7rem);letter-spacing:-0.02em;font-weight:700;}
+  .section-head p{margin-top:14px;color:var(--ink-soft);font-size:1.03rem;line-height:1.6;}
+
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-stagger > *{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1);}
+  .reveal-stagger.in > *{opacity:1;transform:translateY(0);}
+  .reveal-stagger.in > *:nth-child(1){transition-delay:.05s;}
+  .reveal-stagger.in > *:nth-child(2){transition-delay:.15s;}
+  .reveal-stagger.in > *:nth-child(3){transition-delay:.25s;}
+  .reveal-stagger.in > *:nth-child(4){transition-delay:.35s;}
+
+  /* ---------- ABOUT ---------- */
+  #about{background:var(--sky-pale);}
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:start;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-text p{font-size:1.08rem;line-height:1.75;color:var(--ink);}
+  .about-text p + p{margin-top:18px;}
+  .about-text strong{color:var(--sky-deep);}
+
+  .stat-card{
+    background:var(--white);border-radius:14px;padding:22px 24px;
+    border:1px solid var(--line);
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .stat-num{font-family:'Space Grotesk',sans-serif;font-size:2.1rem;font-weight:700;color:var(--sky-deep);}
+  .stat-label{font-size:.85rem;color:var(--ink-soft);}
+  .stat-card.red .stat-num{color:var(--red);}
+
+  /* ---------- TIMELINE (EDUCATION) ---------- */
+  .timeline{position:relative;max-width:760px;}
+  .timeline::before{
+    content:'';position:absolute;left:19px;top:6px;bottom:6px;width:2px;
+    background:var(--line);
+  }
+  .timeline .t-progress{
+    content:'';position:absolute;left:19px;top:6px;width:2px;height:0%;
+    background:linear-gradient(var(--sky),var(--red));
+    transition:height 1.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .t-item{position:relative;padding-left:58px;margin-bottom:52px;}
+  .t-item:last-child{margin-bottom:0;}
+  .t-dot{
+    position:absolute;left:8px;top:4px;width:24px;height:24px;border-radius:50%;
+    background:var(--white);border:3px solid var(--sky);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .4s ease, border-color .4s ease;
+  }
+  .t-item.in .t-dot{transform:scale(1.12);border-color:var(--red);}
+  .t-dot i{width:7px;height:7px;border-radius:50%;background:var(--sky);}
+  .t-item.in .t-dot i{background:var(--red);}
+  .t-year{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--sky-deep);font-size:.9rem;letter-spacing:.02em;}
+  .t-item h3{font-size:1.25rem;margin-top:5px;font-weight:700;}
+  .t-item p{margin-top:6px;color:var(--ink-soft);font-size:.98rem;line-height:1.6;}
+
+  /* ---------- ACTIVITIES ---------- */
+  #activities{background:var(--ink);color:var(--white);}
+  #activities .section-head p{color:#a9c3d6;}
+  #activities .section-head h2{color:var(--white);}
+
+  .card-row{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  @media (max-width:800px){.card-row{grid-template-columns:1fr;}}
+
+  .flip-card{perspective:1400px;height:250px;}
+  .flip-inner{
+    position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1);
+    transform-style:preserve-3d;
+  }
+  .flip-card:hover .flip-inner{transform:rotateY(180deg);}
+  .flip-face{
+    position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;
+    padding:30px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .flip-front{background:#16344a;border:1px solid #234a63;}
+  .flip-back{background:linear-gradient(135deg,var(--sky),var(--sky-deep));transform:rotateY(180deg);}
+  .flip-role{font-size:.78rem;color:var(--sky);font-weight:600;}
+  .flip-front .flip-role{color:#7fc5ea;}
+  .flip-org{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:700;margin-top:8px;}
+  .flip-hint{font-size:.82rem;color:#7fa7bf;}
+  .flip-back p{font-size:.96rem;line-height:1.55;color:#eafaff;}
+  .flip-icon{width:34px;height:34px;}
+
+  /* ---------- ACHIEVEMENT / FOOTBALL ---------- */
+  #achievement{
+    background:linear-gradient(180deg,var(--white) 0%, var(--sky-pale) 100%);
+    text-align:left;
+  }
+  .trophy-wrap{
+    display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;
+    background:var(--white);border:1px solid var(--line);border-radius:20px;
+    padding:48px;
+    box-shadow:0 20px 60px -30px rgba(28,116,168,.25);
+  }
+  @media (max-width:700px){.trophy-wrap{grid-template-columns:1fr;text-align:center;padding:34px;}}
+  .trophy-icon{width:110px;height:110px;color:var(--red);animation:swing 3.4s ease-in-out infinite;transform-origin:top center;}
+  @keyframes swing{0%,100%{transform:rotate(-4deg);}50%{transform:rotate(4deg);}}
+  .ach-title{font-size:1.6rem;font-weight:700;letter-spacing:-0.01em;}
+  .ach-title .cup{color:var(--red);}
+  .ach-desc{margin-top:10px;color:var(--ink-soft);font-size:1.02rem;line-height:1.6;max-width:520px;}
+  .ach-role{
+    display:inline-block;margin-top:18px;padding:8px 18px;border-radius:100px;
+    background:var(--ink);color:var(--white);font-size:.85rem;font-weight:600;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    background:var(--ink);color:var(--white);padding:90px 6% 40px;
+    position:relative;overflow:hidden;
+  }
+  .footer-inner{max-width:640px;position:relative;z-index:2;}
+  footer h2{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-0.02em;line-height:1.08;}
+  footer h2 .accent{color:var(--sky);}
+  footer p{margin-top:18px;color:#9db7c9;max-width:460px;line-height:1.6;}
+  .foot-bottom{
+    margin-top:70px;display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid #1e3b52;padding-top:26px;font-size:.82rem;color:#7f9bb0;
+    flex-wrap:wrap;gap:12px;
+  }
+  .foot-blob{position:absolute;bottom:-120px;right:-80px;width:400px;height:400px;
+    background:radial-gradient(circle,rgba(63,169,224,.18),transparent 70%);
+    border-radius:50%;animation:float-rev 12s ease-in-out infinite;
+  }
+
+  /* cursor-follow accent dot */
+  #glow{
+    position:fixed;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle,rgba(63,169,224,.10),transparent 70%);
+    pointer-events:none;z-index:0;transition:transform .15s ease-out;
+    top:0;left:0;
+  }
+</style>
+</head>
+<body>
+
+<div id="glow"></div>
+
+<nav id="nav">
+  <div class="brand"><span class="brand-dot"></span>Mahbub Sami</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#activities">Leadership</a>
+    <a href="#achievement">Football</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2.6 6.6L21 11l-6.4 2.4L12 20l-2.6-6.6L3 11l6.4-2.4L12 2z"/></svg>
+      Dhaka, Bangladesh
+    </div>
+    <h1>
+      <span class="line"><span>Mahbub Sami</span></span>
+      <span class="line"><span>builds, leads, and competes.</span></span>
+    </h1>
+    <p class="sub">Computer Science &amp; Engineering student at Southeast University, formerly of United International University — where data science leadership and a football captaincy shared the same week.</p>
+    <div class="hero-tags">
+      <span class="tag">CSE Undergraduate</span>
+      <span class="tag">Former VP, Data Science Club</span>
+      <span class="tag hot">VC Cup 2025 Champion Captain</span>
+    </div>
+  </div>
+
+  <div class="ribbon">
+    <svg viewBox="0 0 500 500" fill="none">
+      <circle class="float-slow" cx="380" cy="120" r="90" fill="#eaf7ff" stroke="#3fa9e0" stroke-width="2"/>
+      <rect class="float" x="300" y="260" width="120" height="120" rx="28" fill="none" stroke="#e6394a" stroke-width="2" opacity="0.55" transform="rotate(12 360 320)"/>
+      <circle class="float-rev" cx="200" cy="400" r="46" fill="#3fa9e0" opacity="0.12"/>
+      <path class="float" d="M330 40 L360 100 L420 108 L376 148 L388 208 L330 178 L272 208 L284 148 L240 108 L300 100 Z" fill="#e6394a" opacity="0.14"/>
+    </svg>
+  </div>
+
+  <div class="scroll-cue"><span>Scroll</span><span class="bar"></span></div>
+</section>
+
+<section id="about">
+  <div class="section-head reveal">
+    <h2>A dual track: systems and sport</h2>
+    <p>Two years of organizing, coding, and competing across two universities.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Mahbub is currently pursuing a <strong>Bachelor of Science in Computer Science and Engineering</strong> at <strong>Southeast University</strong>, after moving there from <strong>United International University (UIU)</strong> in 2026.</p>
+      <p>At UIU, he didn't just attend — he ran things. As <strong>Vice President of the Data Science Club</strong>, he helped steer the club's direction, and as <strong>manager of the management team for the UIU Data Science Fest</strong>, he handled the logistics that turned an idea into an event.</p>
+      <p>Off the keyboard, he captained a football team to the top of the <strong>UIU VC Cup 2025</strong>, proving the same discipline that plans a data fest can also win a tournament.</p>
+    </div>
+    <div class="reveal-stagger reveal">
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">2026</div>
+          <div class="stat-label">Joined Southeast University</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-num">1st</div>
+          <div class="stat-label">Place, UIU VC Cup 2025</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">VP</div>
+          <div class="stat-label">Data Science Club, UIU</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2021–23</div>
+          <div class="stat-label">SSC to HSC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-head reveal">
+    <h2>Education</h2>
+    <p>From Barnamala to Southeast University, by way of UIU.</p>
+  </div>
+  <div class="timeline" id="timeline">
+    <div class="t-progress" id="t-progress"></div>
+
+    <div class="t-item reveal">
+      <div class="t-dot"><i></i></div>
+      <div class="t-year">2026 — Present</div>
+      <h3>Southeast University</h3>
+      <p>Bachelor of Science in Computer Science and Engineering. Continuing his undergraduate studies after transferring from UIU.</p>
+    </div>
+
+    <div class="t-item reveal">
+      <div class="t-dot"><i></i></div>
+      <div class="t-year">2023 — 2026</div>
+      <h3>United International University</h3>
+      <p>Studied CSE while serving as Vice President of the Data Science Club and managing the UIU Data Science Fest's management team — alongside captaining the university's VC Cup–winning football team.</p>
+    </div>
+
+    <div class="t-item reveal">
+      <div class="t-dot"><i></i></div>
+      <div class="t-year">2023</div>
+      <h3>HSC — Dr Mahbubur Rahman Mollah College</h3>
+      <p>Completed Higher Secondary Certificate.</p>
+    </div>
+
+    <div class="t-item reveal">
+      <div class="t-dot"><i></i></div>
+      <div class="t-year">2021</div>
+      <h3>SSC — Barnamala Adarsha High School and College</h3>
+      <p>Completed Secondary School Certificate.</p>
+    </div>
+  </div>
+</section>
+
+<section id="activities">
+  <div class="section-head reveal">
+    <h2>Leadership on campus</h2>
+    <p>Two roles, one club, one festival — hover a card to see the impact.</p>
+  </div>
+  <div class="card-row reveal-stagger reveal">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <div>
+            <div class="flip-role">United International University</div>
+            <div class="flip-org">Vice President, Data Science Club</div>
+          </div>
+          <div class="flip-hint">Hover to see more →</div>
+        </div>
+        <div class="flip-face flip-back">
+          <svg class="flip-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          <p>Helped set the club's direction and represented it in decisions on events, partnerships, and member growth.</p>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <div>
+            <div class="flip-role">UIU Data Science Fest</div>
+            <div class="flip-org">Manager, Management Team</div>
+          </div>
+          <div class="flip-hint">Hover to see more →</div>
+        </div>
+        <div class="flip-face flip-back">
+          <svg class="flip-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m6 10V11m-9 6h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          <p>Ran the operational side of the festival's management team, keeping the event's moving parts on schedule.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievement">
+  <div class="section-head reveal">
+    <h2>On the pitch</h2>
+    <p>Leadership wasn't only in meeting rooms.</p>
+  </div>
+  <div class="trophy-wrap reveal">
+    <svg class="trophy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8M12 17v4M7 4h10v4a5 5 0 01-10 0V4z"/>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M7 5H4a1 1 0 00-1 1v1a4 4 0 004 4M17 5h3a1 1 0 011 1v1a4 4 0 01-4 4"/>
+    </svg>
+    <div>
+      <div class="ach-title">UIU VC Cup <span class="cup">2025</span> — Champions</div>
+      <p class="ach-desc">Mahbub played football for United International University and captained the team that went on to win the UIU VC Cup 2025, leading the side through the tournament to the title.</p>
+      <span class="ach-role">Team Captain</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="foot-blob"></div>
+  <div class="footer-inner">
+    <h2>Studying systems.<br>Still <span class="accent">captaining</span> teams.</h2>
+    <p>Currently a CSE undergraduate at Southeast University — always open to data science collaborations, event teams, or a five-a-side.</p>
+  </div>
+  <div class="foot-bottom">
+    <span>Mahbub Sami</span>
+    <span>Southeast University · CSE</span>
+  </div>
+</footer>
+
+<script>
+  // nav shadow on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // cursor glow
+  const glow = document.getElementById('glow');
+  window.addEventListener('mousemove', (e) => {
+    glow.style.transform = `translate(${e.clientX - 210}px, ${e.clientY - 210}px)`;
+  });
+
+  // generic reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+      }
+    });
+  }, {threshold:0.18});
+  revealEls.forEach(el => io.observe(el));
+
+  // timeline progress + dot activation
+  const items = document.querySelectorAll('.t-item');
+  const progress = document.getElementById('t-progress');
+  const timeline = document.getElementById('timeline');
+
+  function updateTimeline(){
+    const rect = timeline.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const start = rect.top;
+    const total = rect.height;
+    let filled = (vh*0.75 - start);
+    filled = Math.max(0, Math.min(filled, total));
+    progress.style.height = filled + 'px';
+
+    items.forEach(item => {
+      const r = item.getBoundingClientRect();
+      if(r.top < vh*0.78){ item.classList.add('in'); }
+    });
+  }
+  window.addEventListener('scroll', updateTimeline);
+  window.addEventListener('resize', updateTimeline);
+  updateTimeline();
+</script>
+
+</body>
+</html>
